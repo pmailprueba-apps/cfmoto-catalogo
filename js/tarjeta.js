@@ -92,7 +92,7 @@
   // 3. Enlace directo a WhatsApp con mensaje inteligente
   function openWhatsApp(customText = null) {
     trackEvent('whatsapp_click', { customText });
-    const defaultText = `¡Hola Alex! Estuve revisando tu tarjeta digital CFMOTO y me gustaría recibir información sobre motos y planes de financiamiento.\n\n📲 (Mi tarjeta guardada: ${CONFIG.CARD_URL}) [${tagOrigin}]`;
+    const defaultText = `¡Hola Alex! Estuve revisando tu tarjeta digital CFMOTO y me gustaría recibir información sobre motos y planes de financiamiento.\n\n📲 Mi tarjeta digital guardada:\n${CONFIG.CARD_URL}\n\n[${tagOrigin}]`;
     const message = encodeURIComponent(customText || defaultText);
     const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${message}`;
     window.open(whatsappUrl, '_blank');
@@ -288,7 +288,7 @@
       btnVisitaCarranza.addEventListener('click', (e) => {
         e.preventDefault();
         trackEvent('agenda_visita_carranza');
-        openWhatsApp(`¡Hola Alex! Vi tu tarjeta digital y quiero visitarte en la agencia de Carranza 1433.\n¿En qué horario me puedes atender?\n\n📲 (Tarjeta guardada: ${CONFIG.CARD_URL}) [${tagOrigin}]`);
+        openWhatsApp(`¡Hola Alex! Vi tu tarjeta digital y quiero visitarte en la agencia de Carranza 1433.\n¿En qué horario me puedes atender?\n\n📲 Mi tarjeta digital:\n${CONFIG.CARD_URL}\n\n[${tagOrigin}]`);
       });
     }
 
@@ -349,7 +349,7 @@
           `*Teléfono:* ${telefono}`,
           `*Plan:* ${paymentType}`,
           paymentType === 'Financiamiento' ? `*Enganche estimado:* ${enganche}` : '',
-          `\n📲 (Visto en mi tarjeta digital: ${CONFIG.CARD_URL})`,
+          `\n📲 Mi tarjeta digital:\n${CONFIG.CARD_URL}\n`,
           `[${tagOrigin}]`
         ].filter(Boolean).join('\n');
 
