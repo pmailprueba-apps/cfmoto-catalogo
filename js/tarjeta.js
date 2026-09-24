@@ -17,6 +17,7 @@
     MAPS_URL: 'https://maps.google.com/?q=CFMOTO+San+Luis+Potosi+Av+Venustiano+Carranza+1433',
     CATALOG_JSON_URL: 'data/catalog-master.json',
     WEBSITE_URL: 'https://pmailprueba-apps.github.io/cfmoto-catalogo/',
+    CARD_URL: 'https://pmailprueba-apps.github.io/cfmoto-catalogo/tarjeta.html',
     EMAIL: 'alexram@me.com',
     INSTAGRAM_URL: 'https://www.instagram.com/cfalexram80?stkn=dHNjNjZrNmhiYm5w&utm_source=qr',
     TIKTOK_URL: 'https://www.tiktok.com/@alexram804?_r=1&_t=ZS-9A0ANJhojBs',
@@ -91,7 +92,7 @@
   // 3. Enlace directo a WhatsApp con mensaje inteligente
   function openWhatsApp(customText = null) {
     trackEvent('whatsapp_click', { customText });
-    const defaultText = `Hola Alex, llegué desde tu tarjeta NFC y quiero información sobre una CFMOTO en la agencia ubicada en Carranza. [${tagOrigin}]`;
+    const defaultText = `¡Hola Alex! Estuve revisando tu tarjeta digital CFMOTO y me gustaría recibir información sobre motos y planes de financiamiento.\n\n📲 (Mi tarjeta guardada: ${CONFIG.CARD_URL}) [${tagOrigin}]`;
     const message = encodeURIComponent(customText || defaultText);
     const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${message}`;
     window.open(whatsappUrl, '_blank');
@@ -287,7 +288,7 @@
       btnVisitaCarranza.addEventListener('click', (e) => {
         e.preventDefault();
         trackEvent('agenda_visita_carranza');
-        openWhatsApp(`Hola Alex, vi tu tarjeta NFC y quiero visitarte en la agencia ubicada en Carranza. ¿En qué horario me puedes atender? [${tagOrigin}]`);
+        openWhatsApp(`¡Hola Alex! Vi tu tarjeta digital y quiero visitarte en la agencia de Carranza 1433.\n¿En qué horario me puedes atender?\n\n📲 (Tarjeta guardada: ${CONFIG.CARD_URL}) [${tagOrigin}]`);
       });
     }
 
@@ -348,6 +349,7 @@
           `*Teléfono:* ${telefono}`,
           `*Plan:* ${paymentType}`,
           paymentType === 'Financiamiento' ? `*Enganche estimado:* ${enganche}` : '',
+          `\n📲 (Visto en mi tarjeta digital: ${CONFIG.CARD_URL})`,
           `[${tagOrigin}]`
         ].filter(Boolean).join('\n');
 
