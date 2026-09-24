@@ -1,0 +1,1058 @@
+/* ==========================================================================
+   TARJETA DIGITAL NFC — ALEX RAMOS / CFMOTO
+   Estilo Fresco Oficial: Blanco, Turquesa/Cian CFMOTO (#00d1ff / #00d2c4) y Gris Titanio/Slate
+   ========================================================================== */
+
+:root {
+  --bg-primary: #090c10;
+  --bg-card: rgba(18, 22, 29, 0.88);
+  --bg-card-hover: rgba(26, 32, 42, 0.95);
+  --bg-elevated: #151a22;
+  
+  /* Paleta Oficial CFMOTO Fresco */
+  --cfmoto-cyan: #00d1ff;
+  --cfmoto-teal: #00d2c4;
+  --cfmoto-cyan-glow: rgba(0, 209, 255, 0.45);
+  --cfmoto-cyan-soft: rgba(0, 209, 255, 0.12);
+  --cfmoto-cyan-border: rgba(0, 209, 255, 0.32);
+  
+  --color-white: #ffffff;
+  --gray-100: #f5f7fa;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #334155;
+  --gray-700: #1e293b;
+  --gray-800: #141a23;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-tech: var(--cfmoto-cyan-border);
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+  
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Impact", -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --shadow-card: 0 12px 36px -10px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+  --shadow-cyan: 0 4px 20px -2px var(--cfmoto-cyan-glow);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--gray-100);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+
+/* Fondo moderno con atmósfera fresca: halos turquesa suaves y gris grafito */
+body {
+  background-image: 
+    radial-gradient(circle at 50% -5%, rgba(0, 209, 255, 0.18), transparent 55%),
+    radial-gradient(circle at 85% 75%, rgba(0, 210, 196, 0.08), transparent 45%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.012) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.012) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.012) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(255, 255, 255, 0.012) 25%, #090c10 25%);
+  background-size: 100% 100%, 100% 100%, 10px 10px, 10px 10px, 10px 10px, 10px 10px;
+  background-attachment: fixed;
+}
+
+/* Contenedor central (Mobile First) */
+.card-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px 20px 48px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Indicador de lectura NFC (Fresco en Turquesa) */
+.nfc-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 14px;
+  padding: 6px 14px;
+  background: var(--cfmoto-cyan-soft);
+  border: 1px solid var(--cfmoto-cyan-border);
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cfmoto-cyan);
+  width: fit-content;
+  box-shadow: 0 2px 12px rgba(0, 209, 255, 0.15);
+  animation: pulseNfc 2.5s infinite;
+}
+
+.nfc-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--cfmoto-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--cfmoto-cyan);
+}
+
+@keyframes pulseNfc {
+  0%, 100% { opacity: 0.95; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(0.97); }
+}
+
+/* ==========================================================================
+   HERO / CABECERA DE LA TARJETA
+   ========================================================================== */
+.hero-card {
+  position: relative;
+  background: linear-gradient(175deg, #141a24 0%, #0d1117 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px 20px;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Acento superior en Turquesa CFMOTO */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cfmoto-cyan), transparent);
+  box-shadow: 0 0 12px var(--cfmoto-cyan);
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cfmoto-emblem {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--color-white);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cfmoto-emblem span {
+  color: var(--cfmoto-cyan);
+  text-shadow: 0 0 14px var(--cfmoto-cyan-glow);
+}
+
+.tag-market {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--gray-300);
+}
+
+/* Avatar / Foto con Halo Turquesa */
+.avatar-section {
+  position: relative;
+  margin: 14px auto 16px;
+  width: 96px;
+  height: 96px;
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 209, 255, 0.55);
+  animation: rotateRing 22s linear infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.avatar-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 25px var(--cfmoto-cyan-glow);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--color-white);
+  position: relative;
+  z-index: 2;
+  background: #111;
+}
+
+/* Nombre Alex Ramos */
+.advisor-identity {
+  margin-bottom: 12px;
+}
+
+.advisor-name {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: 5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.advisor-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cfmoto-cyan);
+  background: var(--cfmoto-cyan-soft);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--cfmoto-cyan-border);
+}
+
+.hero-subtitle {
+  font-size: 13px;
+  color: var(--gray-400);
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   TABLERO DIGITAL DE MOTOCICLETA (MOTORCYCLE DIGITAL DASHBOARD CLUSTER)
+   Inspirado en el display digital TFT/LCD con arco de tacómetro 10K RPM en Turquesa
+   ========================================================================== */
+.moto-dashboard {
+  width: 100%;
+  max-width: 380px;
+  margin: 14px auto 0;
+  position: relative;
+  background: radial-gradient(circle at 50% 20%, rgba(0, 209, 255, 0.08), transparent 70%), #06090e;
+  border: 1px solid rgba(0, 209, 255, 0.25);
+  border-radius: 18px;
+  padding: 8px 6px 4px;
+  box-shadow: 
+    inset 0 2px 10px rgba(0, 0, 0, 0.9),
+    0 10px 25px -5px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(0, 209, 255, 0.2);
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.moto-dashboard:active {
+  transform: scale(0.985);
+  border-color: var(--cfmoto-cyan);
+  box-shadow: 0 0 22px rgba(0, 209, 255, 0.4);
+}
+
+.dash-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tipografías y marcas del tablero */
+.dash-num {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  fill: #e2e8f0;
+  text-anchor: middle;
+}
+
+.dash-num.red {
+  fill: #ff2a40;
+}
+
+.dash-unit {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 7.5px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  fill: var(--cfmoto-cyan);
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.dash-speed {
+  font-family: "Impact", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  fill: var(--cfmoto-cyan);
+  text-anchor: middle;
+  filter: drop-shadow(0 0 6px rgba(0, 209, 255, 0.7));
+}
+
+.dash-kmh {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  fill: #94a3b8;
+  text-anchor: middle;
+}
+
+.dash-sub {
+  font-family: monospace, sans-serif;
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  fill: #64748b;
+  text-anchor: middle;
+}
+
+.dash-label {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 9px;
+  font-weight: 900;
+  fill: var(--cfmoto-cyan);
+  text-anchor: middle;
+}
+
+/* Animación del Tacómetro (Curva del Arco de 0 a 10K RPM) */
+.dash-tacho-bar {
+  stroke-dasharray: 380;
+  stroke-dashoffset: 80;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: idlePulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes idlePulse {
+  0% { stroke-dashoffset: 95; }
+  50% { stroke-dashoffset: 88; }
+  100% { stroke-dashoffset: 92; }
+}
+
+.moto-dashboard.revving .dash-tacho-bar {
+  animation: tachSweep 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes tachSweep {
+  0% { stroke-dashoffset: 380; }
+  45% { stroke-dashoffset: 0; } /* Sube a 10,000 RPM (Redline) */
+  60% { stroke-dashoffset: 15; }
+  80% { stroke-dashoffset: 110; }
+  100% { stroke-dashoffset: 90; } /* Vuelve a ralentí */
+}
+
+/* ==========================================================================
+   BOTONES DE ACCIÓN PRINCIPALES
+   ========================================================================== */
+.actions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--gray-100);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.btn-texts {
+  text-align: left;
+}
+
+.btn-main-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-white);
+}
+
+.btn-sub-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-400);
+  margin-top: 2px;
+}
+
+.btn-arrow {
+  color: var(--gray-500);
+  font-size: 14px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.action-btn:hover .btn-arrow,
+.action-btn:active .btn-arrow {
+  transform: translateX(4px);
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   DIFERENCIACIÓN DE BOTONES PRINCIPALES (PALETA OFICIAL CFMOTO)
+   ========================================================================== */
+
+/* 1. WHATSAPP — Verde Oficial (#25D366) */
+.btn-whatsapp {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.16) 0%, rgba(14, 22, 18, 0.95) 100%);
+  border-color: rgba(37, 211, 102, 0.4);
+  box-shadow: 0 4px 18px -4px rgba(37, 211, 102, 0.25);
+}
+
+.btn-whatsapp .btn-icon-box {
+  background: #25d366;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(37, 211, 102, 0.5);
+  border: none;
+}
+
+.btn-whatsapp .btn-main-label {
+  color: #25d366;
+}
+
+.btn-whatsapp .btn-arrow {
+  color: #25d366;
+}
+
+/* 2. VER CATÁLOGO COMPLETO — 🩵 Turquesa Tecnológico CFMOTO (#00D1FF) */
+.btn-catalogo {
+  background: linear-gradient(135deg, rgba(0, 209, 255, 0.16) 0%, rgba(12, 20, 28, 0.95) 100%);
+  border-color: rgba(0, 209, 255, 0.45);
+  box-shadow: 0 4px 18px -4px rgba(0, 209, 255, 0.25);
+}
+
+.btn-catalogo .btn-main-label {
+  color: var(--cfmoto-cyan);
+}
+
+.btn-catalogo .btn-arrow {
+  color: var(--cfmoto-cyan);
+}
+
+.btn-catalogo:active {
+  box-shadow: 0 0 20px rgba(0, 209, 255, 0.4);
+}
+
+/* 3. COTIZAR MI MOTO — 🔴 Rojo Venta / Acción CFMOTO (#FF3B50) */
+.btn-cotizar {
+  background: linear-gradient(135deg, rgba(255, 42, 64, 0.18) 0%, rgba(26, 14, 18, 0.95) 100%);
+  border-color: rgba(255, 42, 64, 0.48);
+  box-shadow: 0 4px 18px -4px rgba(255, 42, 64, 0.3);
+}
+
+.btn-cotizar .btn-main-label {
+  color: #ff3b50;
+}
+
+.btn-cotizar .btn-arrow {
+  color: #ff3b50;
+}
+
+.btn-cotizar:active {
+  box-shadow: 0 0 20px rgba(255, 42, 64, 0.45);
+}
+
+/* 4. FICHAS TÉCNICAS PDF — ⚙️ Gris Titanio Técnico CFMOTO (#CBD5E1 / #94A3B8) */
+.btn-fichas {
+  background: linear-gradient(135deg, rgba(148, 163, 184, 0.12) 0%, rgba(18, 22, 28, 0.95) 100%);
+  border-color: rgba(148, 163, 184, 0.35);
+  box-shadow: 0 4px 18px -4px rgba(148, 163, 184, 0.15);
+}
+
+.btn-fichas .btn-main-label {
+  color: #cbd5e1;
+}
+
+.btn-fichas .btn-arrow {
+  color: #94a3b8;
+}
+
+.btn-fichas:active {
+  border-color: #e2e8f0;
+  box-shadow: 0 0 18px rgba(203, 213, 225, 0.3);
+}
+
+/* 5. UBICACIÓN AGENCIA — 🩵 Turquesa Tecnológico CFMOTO (#00D1FF) */
+.btn-ubicacion {
+  background: linear-gradient(135deg, rgba(0, 209, 255, 0.15) 0%, rgba(12, 20, 28, 0.95) 100%);
+  border-color: rgba(0, 209, 255, 0.42);
+  box-shadow: 0 4px 18px -4px rgba(0, 209, 255, 0.22);
+}
+
+.btn-ubicacion .btn-main-label {
+  color: var(--cfmoto-cyan);
+}
+
+.btn-ubicacion .btn-arrow {
+  color: var(--cfmoto-cyan);
+}
+
+.btn-ubicacion:active {
+  box-shadow: 0 0 20px rgba(0, 209, 255, 0.4);
+}
+
+/* 6. GUARDAR MI CONTACTO — ⚪ Blanco Titanio Nardo (#FFFFFF) */
+.btn-vcard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(22, 26, 34, 0.95) 100%);
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 18px -4px rgba(255, 255, 255, 0.15);
+}
+
+.btn-vcard .btn-main-label {
+  color: #ffffff;
+}
+
+.btn-vcard .btn-arrow {
+  color: #ffffff;
+}
+
+.btn-vcard:active {
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   SECCIÓN DE REDES SOCIALES (INSTAGRAM, TIKTOK, FACEBOOK)
+   ========================================================================== */
+.social-section {
+  margin-bottom: 24px;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--gray-300);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.social-btn svg {
+  width: 26px;
+  height: 26px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.social-btn:active {
+  transform: scale(0.95);
+}
+
+.social-ig:active {
+  border-color: #dc2743;
+  box-shadow: 0 0 18px rgba(220, 39, 67, 0.45);
+}
+
+.social-tt:active {
+  border-color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
+}
+
+.social-fb:active {
+  border-color: #1877F2;
+  box-shadow: 0 0 18px rgba(24, 119, 242, 0.45);
+}
+
+.social-btn:active svg {
+  transform: scale(1.15);
+}
+
+/* ==========================================================================
+   MODELOS DESTACADOS (CARRUSEL)
+   ========================================================================== */
+.featured-section {
+  margin-bottom: 26px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 12px;
+  background: var(--cfmoto-cyan);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--cfmoto-cyan);
+}
+
+.models-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.models-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mini-bike-card {
+  flex: 0 0 205px;
+  scroll-snap-align: start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mini-bike-card:active {
+  transform: scale(0.97);
+  border-color: var(--cfmoto-cyan);
+  box-shadow: 0 0 16px rgba(0, 209, 255, 0.25);
+}
+
+.mini-bike-img {
+  width: 100%;
+  height: 112px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.65));
+}
+
+.mini-bike-name {
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-white);
+  letter-spacing: 0.5px;
+}
+
+.mini-bike-specs {
+  font-size: 11px;
+  color: var(--gray-400);
+  margin: 3px 0 6px;
+}
+
+.mini-bike-price {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--cfmoto-cyan);
+}
+
+/* ==========================================================================
+   FOOTER Y UBICACIÓN
+   ========================================================================== */
+.card-footer {
+  text-align: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.agency-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.agency-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.agency-address {
+  font-size: 12px;
+  color: var(--gray-400);
+  line-height: 1.45;
+}
+
+.agency-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--cfmoto-cyan);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.copyright {
+  font-size: 11px;
+  color: var(--gray-500);
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+.copyright strong {
+  color: var(--gray-300);
+}
+
+/* ==========================================================================
+   MODALES (COTIZADOR Y FICHAS)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-sheet {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  margin: 0 auto;
+  background: #11151c;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-sheet {
+  transform: translateY(0);
+}
+
+.modal-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.modal-drag-bar {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Formularios */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray-400);
+  margin-bottom: 6px;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 13px 14px;
+  background: #171d26;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--cfmoto-cyan);
+  box-shadow: 0 0 0 2px var(--cfmoto-cyan-soft);
+}
+
+.form-radio-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.radio-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: #171d26;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio-pill input {
+  position: absolute;
+  opacity: 0;
+}
+
+.radio-pill.selected {
+  background: var(--cfmoto-cyan-soft);
+  border-color: var(--cfmoto-cyan);
+  color: var(--color-white);
+}
+
+.submit-cotizar-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--cfmoto-cyan) 0%, #0099cc 100%);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #071720;
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--shadow-cyan);
+  margin-top: 10px;
+}
+
+.submit-cotizar-btn:active {
+  transform: scale(0.98);
+}
+
+/* Fichas Técnicas */
+.fichas-search {
+  margin-bottom: 14px;
+}
+
+.fichas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ficha-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #171d26;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.ficha-item:active {
+  background: #202734;
+  border-color: var(--cfmoto-cyan);
+}
+
+.ficha-info h4 {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.ficha-info p {
+  font-size: 11px;
+  color: var(--gray-400);
+}
+
+.ficha-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--cfmoto-cyan-soft);
+  color: var(--cfmoto-cyan);
+  border: 1px solid var(--cfmoto-cyan-border);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #151b24;
+  color: var(--color-white);
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--cfmoto-cyan);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), var(--shadow-cyan);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2000;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}

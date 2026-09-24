@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Alex Ramos — Asesor CFMOTO | Tarjeta Digital</title>
+  
+  <!-- SEO & Metadatos -->
+  <meta name="description" content="Tarjeta de presentación digital de Alex Ramos, Asesor de Motocicletas CFMOTO. Catálogo 2026, cotizaciones y atención personalizada por WhatsApp." />
+  <meta name="author" content="Alex Ramos" />
+  <meta name="theme-color" content="#00D1FF" />
+  
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Alex Ramos — Asesor CFMOTO" />
+  <meta property="og:description" content="Encuentra tu próxima CFMOTO. Cotiza al instante, descarga fichas técnicas y contacta directo por WhatsApp." />
+  <meta property="og:image" content="img/cards/675sr.jpg" />
+  <meta property="og:url" content="https://cfmotoslp.com/tarjeta" />
+
+  <!-- PWA & Favicon -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/jpeg" href="img/cards/675sr.jpg" />
+  <link rel="apple-touch-icon" href="img/cards/675sr.jpg" />
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/tarjeta.css" />
+</head>
+<body>
+
+  <main class="card-wrapper">
+
+    <!-- Indicador de Lectura NFC -->
+    <div class="nfc-indicator" id="nfcBadge">
+      <span class="nfc-dot"></span>
+      <span>NFC CONECTADO · ALEX RAMOS</span>
+    </div>
+
+    <!-- Hero Card: Tarjeta de Asesor Motorsport -->
+    <section class="hero-card">
+      <div class="brand-header">
+        <h1 class="cfmoto-emblem">CF<span>MOTO</span></h1>
+        <span class="tag-market">MÉXICO · SLP</span>
+      </div>
+
+      <div class="avatar-section">
+        <div class="avatar-ring"></div>
+        <div class="avatar-glow"></div>
+        <img class="avatar-img" src="img/cards/675sr.jpg" alt="Alex Ramos CFMOTO" />
+      </div>
+
+      <div class="advisor-identity">
+        <h2 class="advisor-name">Alex Ramos</h2>
+        <span class="advisor-title">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+          Asesor de Motos
+        </span>
+      </div>
+
+      <p class="hero-subtitle">Encuentra tu próxima CFMOTO</p>
+
+      <!-- Tablero Digital de Motocicleta CFMOTO (10K RPM / READY) -->
+      <div class="moto-dashboard" id="motoDashboard" title="Toca para acelerar el tacómetro">
+        <svg viewBox="0 0 380 148" class="dash-svg" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <linearGradient id="tachoGrad" x1="0%" y1="100%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00D1FF" />
+              <stop offset="78%" stop-color="#00E5FF" />
+              <stop offset="82%" stop-color="#FF2A40" />
+              <stop offset="100%" stop-color="#FF0022" />
+            </linearGradient>
+          </defs>
+
+          <!-- Bisel exterior del tablero -->
+          <path d="M 25 140 Q 10 140 8 126 L 18 52 Q 35 12 190 10 Q 345 12 362 52 L 372 126 Q 370 140 355 140 Z" fill="#070a0f" stroke="#1c2532" stroke-width="2"/>
+          <path d="M 32 134 L 24 58 Q 42 18 190 16 Q 338 18 356 58 L 348 134 Z" fill="#030508" stroke="#121820" stroke-width="1.5"/>
+
+          <!-- Números de Tacómetro 1 a 10 -->
+          <text x="64" y="68" class="dash-num">1</text>
+          <text x="90" y="50" class="dash-num">2</text>
+          <text x="120" y="38" class="dash-num">3</text>
+          <text x="154" y="32" class="dash-num">4</text>
+          <text x="190" y="30" class="dash-num">5</text>
+          <text x="226" y="32" class="dash-num">6</text>
+          <text x="260" y="38" class="dash-num">7</text>
+          <text x="290" y="50" class="dash-num">8</text>
+          <text x="316" y="68" class="dash-num red">9</text>
+          <text x="336" y="88" class="dash-num red">10</text>
+
+          <!-- Pistas del Arco de Tacómetro -->
+          <path id="tachoTrackBg" d="M 40 85 Q 190 -22 340 85" fill="none" stroke="#141c26" stroke-width="10" stroke-linecap="round" stroke-dasharray="3 2"/>
+          <path id="tachoTrackActive" d="M 40 85 Q 190 -22 340 85" fill="none" stroke="url(#tachoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="3 2" class="dash-tacho-bar" filter="url(#cyanGlow)"/>
+
+          <!-- Etiqueta 10K RPM -->
+          <text x="190" y="44" class="dash-unit">x 1000 r/min · 10K RPM</text>
+
+          <!-- Pantalla LCD Central -->
+          <rect x="135" y="52" width="110" height="52" rx="6" fill="#05080d" stroke="#1a2433" stroke-width="1"/>
+          <text x="190" y="86" class="dash-speed" id="dashSpeed">READY</text>
+          <text x="236" y="70" class="dash-kmh">km/h</text>
+          <text x="190" y="99" class="dash-sub">TRIP 888.8 · ODO 000675</text>
+
+          <!-- Indicador Temperatura Izquierda (C --- H) -->
+          <g class="dash-gauge-left">
+            <text x="46" y="106" class="dash-label">C</text>
+            <rect x="58" y="101" width="7" height="6" rx="1" fill="#00D1FF" filter="url(#cyanGlow)"/>
+            <rect x="67" y="101" width="7" height="6" rx="1" fill="#00D1FF" filter="url(#cyanGlow)"/>
+            <rect x="76" y="101" width="7" height="6" rx="1" fill="#00D1FF" filter="url(#cyanGlow)"/>
+            <rect x="85" y="101" width="7" height="6" rx="1" fill="#141c26"/>
+            <rect x="94" y="101" width="7" height="6" rx="1" fill="#141c26"/>
+            <text x="108" y="106" class="dash-label">H</text>
+          </g>
+
+          <!-- Indicador Combustible Derecha (E --- F) -->
+          <g class="dash-gauge-right">
+            <text x="270" y="106" class="dash-label">E</text>
+            <rect x="282" y="101" width="7" height="6" rx="1" fill="#00D1FF" filter="url(#cyanGlow)"/>
+            <rect x="291" y="101" width="7" height="6" rx="1" fill="#00D1FF" filter="url(#cyanGlow)"/>
+            <rect x="300" y="101" width="7" height="6" rx="1" fill="#00D1FF" filter="url(#cyanGlow)"/>
+            <rect x="309" y="101" width="7" height="6" rx="1" fill="#00D1FF" filter="url(#cyanGlow)"/>
+            <rect x="318" y="101" width="7" height="6" rx="1" fill="#141c26"/>
+            <text x="332" y="106" class="dash-label">F</text>
+          </g>
+
+          <!-- Testigos Luminosos (Neutral, Luces, Motor) -->
+          <circle cx="150" cy="114" r="3" fill="#00D1FF" opacity="0.8"/>
+          <circle cx="165" cy="114" r="3.5" fill="#00FF88" filter="url(#cyanGlow)"/>
+          <text x="165" y="117" font-size="5" font-weight="900" text-anchor="middle" fill="#05140b">N</text>
+          <circle cx="180" cy="114" r="3" fill="#00D1FF" opacity="0.8"/>
+          <circle cx="215" cy="114" r="3" fill="#FFB703" opacity="0.8"/>
+          <circle cx="230" cy="114" r="3" fill="#FF2A40" opacity="0.8"/>
+
+          <!-- Botones Decorativos Inferiores -->
+          <g class="dash-buttons" opacity="0.55">
+            <rect x="42" y="122" width="16" height="5" rx="2.5" fill="#141c26" stroke="#232f40" stroke-width="0.5"/>
+            <text x="50" y="126" font-size="5" text-anchor="middle" fill="#64748b">-</text>
+            <rect x="62" y="122" width="16" height="5" rx="2.5" fill="#141c26" stroke="#232f40" stroke-width="0.5"/>
+            <text x="70" y="126" font-size="5" text-anchor="middle" fill="#64748b">+</text>
+            <text x="110" y="130" font-size="5" fill="#475569">PUSH CANCEL</text>
+            
+            <rect x="305" y="122" width="18" height="5" rx="2.5" fill="#141c26" stroke="#232f40" stroke-width="0.5"/>
+            <text x="314" y="126" font-size="5" text-anchor="middle" fill="#94a3b8">SEL</text>
+            <rect x="327" y="122" width="18" height="5" rx="2.5" fill="#141c26" stroke="#232f40" stroke-width="0.5"/>
+            <text x="336" y="126" font-size="5" text-anchor="middle" fill="#94a3b8">TRIP</text>
+            <text x="288" y="130" font-size="5" fill="#475569">mph · km/h</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Botones de Acción Táctiles Principales -->
+    <section class="actions-grid">
+
+      <!-- 1. HABLAR POR WHATSAPP (Destacado - Único con Icono Oficial) -->
+      <a href="#" class="action-btn btn-whatsapp" id="btnWhatsapp">
+        <div class="btn-content">
+          <div class="btn-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+          </div>
+          <div class="btn-texts">
+            <span class="btn-main-label">Hablar por WhatsApp</span>
+            <span class="btn-sub-label">Atención inmediata · 444 844 8721</span>
+          </div>
+        </div>
+        <div class="btn-arrow">➔</div>
+      </a>
+
+      <!-- 2. VER CATÁLOGO OFICIAL -->
+      <a href="index.html" class="action-btn btn-catalogo" id="btnGoCatalog">
+        <div class="btn-content">
+          <div class="btn-texts">
+            <span class="btn-main-label">Ver Catálogo Completo</span>
+            <span class="btn-sub-label">44 modelos · Portafolio oficial 2026</span>
+          </div>
+        </div>
+        <div class="btn-arrow">➔</div>
+      </a>
+
+      <!-- 3. COTIZAR MI MOTO -->
+      <button type="button" class="action-btn btn-cotizar" id="btnOpenCotizar">
+        <div class="btn-content">
+          <div class="btn-texts">
+            <span class="btn-main-label">Cotizar mi Moto</span>
+            <span class="btn-sub-label">Contado o financiamiento express</span>
+          </div>
+        </div>
+        <div class="btn-arrow">➔</div>
+      </button>
+
+      <!-- 4. FICHAS TÉCNICAS OFICIALES -->
+      <button type="button" class="action-btn btn-fichas" id="btnOpenFichas">
+        <div class="btn-content">
+          <div class="btn-texts">
+            <span class="btn-main-label">Fichas Técnicas PDF</span>
+            <span class="btn-sub-label">Especificaciones detalladas de fábrica</span>
+          </div>
+        </div>
+        <div class="btn-arrow">➔</div>
+      </button>
+
+      <!-- 5. UBICACIÓN AGENCIA -->
+      <a href="#" class="action-btn btn-ubicacion" id="btnUbicacion">
+        <div class="btn-content">
+          <div class="btn-texts">
+            <span class="btn-main-label">Ubicación de la Agencia</span>
+            <span class="btn-sub-label">Av. Carranza 1433, Tequisquiapan, SLP</span>
+          </div>
+        </div>
+        <div class="btn-arrow">↗</div>
+      </a>
+
+      <!-- 6. GUARDAR MI CONTACTO (vCard) -->
+      <button type="button" class="action-btn btn-vcard" id="btnSaveContact">
+        <div class="btn-content">
+          <div class="btn-texts">
+            <span class="btn-main-label">Guardar mi Contacto</span>
+            <span class="btn-sub-label">Añadir a Alex Ramos a tu agenda celular</span>
+          </div>
+        </div>
+        <div class="btn-arrow">📥</div>
+      </button>
+
+    </section>
+
+    <!-- Redes Sociales Oficiales de Alex Ramos (Iconos a Color Oficial) -->
+    <section class="social-section">
+      <div class="social-grid">
+        <!-- Instagram Color Oficial -->
+        <a href="#" class="social-btn social-ig" id="linkInstagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Alex Ramos" title="Instagram">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <defs>
+              <linearGradient id="igColorGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f09433"/>
+                <stop offset="25%" stop-color="#e6683c"/>
+                <stop offset="50%" stop-color="#dc2743"/>
+                <stop offset="75%" stop-color="#cc2366"/>
+                <stop offset="100%" stop-color="#bc1888"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#igColorGrad)"/>
+            <rect x="4.8" y="4.8" width="14.4" height="14.4" rx="4" stroke="#ffffff" stroke-width="1.6" fill="none"/>
+            <circle cx="12" cy="12" r="3.6" stroke="#ffffff" stroke-width="1.6" fill="none"/>
+            <circle cx="16.5" cy="7.5" r="1.1" fill="#ffffff"/>
+          </svg>
+        </a>
+
+        <!-- TikTok (Icono Limpio Oficial) -->
+        <a href="#" class="social-btn social-tt" id="linkTikTok" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Alex Ramos" title="TikTok">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.34 6.34 0 0 0 6.34-6.32V8.92a8.28 8.28 0 0 0 4.91 1.63V7.1a4.81 4.81 0 0 1-1-.41z"/>
+          </svg>
+        </a>
+
+        <!-- Facebook Azul Oficial -->
+        <a href="#" class="social-btn social-fb" id="linkFacebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Alex Ramos" title="Facebook">
+          <svg width="26" height="26" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="11" fill="#1877F2"/>
+            <path d="M15.12 12.5l.54-3.5h-3.36V6.73c0-.96.47-1.9 1.98-1.9h1.53V1.85s-1.39-.24-2.72-.24c-2.77 0-4.58 1.68-4.58 4.72v2.67H5.43v3.5h3.08V21.6c.62.1 1.25.15 1.89.15s1.27-.05 1.89-.15v-9.1h2.83z" fill="#FFFFFF"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Modelos Destacados (Acceso Rápido) -->
+    <section class="featured-section">
+      <div class="section-head">
+        <span class="section-title">Modelos Destacados 2026</span>
+        <span style="font-size: 11px; color: var(--text-dim);">Desliza ➔</span>
+      </div>
+      <div class="models-scroll" id="featuredModelsContainer">
+        <!-- Generado dinámicamente por tarjeta.js desde catalog-master.json -->
+      </div>
+    </section>
+
+    <!-- Footer con Datos de Agencia -->
+    <footer class="card-footer">
+      <div class="agency-box">
+        <div class="agency-title">CFMOTO San Luis Potosí</div>
+        <p class="agency-address">
+          Av. Venustiano Carranza 1433, Tequisquiapan, 78250 San Luis Potosí, S.L.P.
+        </p>
+        <div style="display:flex; gap:14px; margin-top:10px; flex-wrap:wrap;">
+          <a href="https://maps.google.com/?q=CFMOTO+San+Luis+Potosi+Av+Venustiano+Carranza+1433" target="_blank" rel="noopener noreferrer" class="agency-link">
+            Abrir en Google Maps ↗
+          </a>
+          <a href="#" id="btnVisitaCarranza" class="agency-link" style="color: #25d366;">
+            Agendar visita en Carranza ↗
+          </a>
+        </div>
+      </div>
+
+      <p class="copyright">
+        © 2026 <strong>Alex Ramos</strong> · Asesor Oficial CFMOTO SLP<br />
+        Tecnología Phygital NFC · <a href="mailto:alexram@me.com" style="color: var(--gray-400); text-decoration: none;">alexram@me.com</a>
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- =======================================================================
+       MODAL 1: COTIZADOR EXPRESS
+       ======================================================================= -->
+  <div class="modal-overlay" id="modalCotizar">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <div class="modal-drag-bar"></div>
+        <h3 class="modal-title">Cotizador Express</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modalCotizar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="formCotizar">
+          <div class="form-group">
+            <label class="form-label" for="cotizarModeloSelect">Modelo de tu interés</label>
+            <select class="form-select" id="cotizarModeloSelect" required>
+              <option value="">Cargando modelos...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cotizarNombre">Tu Nombre Completo</label>
+            <input type="text" class="form-input" id="cotizarNombre" placeholder="Ej. Carlos Mendoza" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cotizarTelefono">Tu Teléfono (WhatsApp)</label>
+            <input type="tel" class="form-input" id="cotizarTelefono" placeholder="Ej. 444 123 4567" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Modalidad de Compra</label>
+            <div class="form-radio-group">
+              <label class="radio-pill selected">
+                <input type="radio" name="paymentType" value="Financiamiento" checked />
+                Financiamiento
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="paymentType" value="Contado" />
+                De Contado
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cotizarEnganche">Enganche Estimado (Opcional)</label>
+            <input type="text" class="form-input" id="cotizarEnganche" placeholder="Ej. $30,000 o 20%" />
+          </div>
+
+          <button type="submit" class="submit-cotizar-btn">
+            <span>Enviar Cotización a Alex ➔</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL 2: FICHAS TÉCNICAS OFICIALES
+       ======================================================================= -->
+  <div class="modal-overlay" id="modalFichas">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <div class="modal-drag-bar"></div>
+        <h3 class="modal-title">Fichas Técnicas Oficiales</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modalFichas">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="fichas-search">
+          <input type="text" class="form-input" id="fichasSearchInput" placeholder="Buscar modelo (ej. 450MT, 675SR, 800NK)..." />
+        </div>
+        <div class="fichas-list" id="fichasListContainer">
+          <p style="text-align: center; color: var(--text-dim); padding: 20px;">Cargando fichas técnicas...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notificaciones -->
+  <div class="toast" id="toastNotification">
+    Contacto descargado con éxito
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/tarjeta.js"></script>
+</body>
+</html>
