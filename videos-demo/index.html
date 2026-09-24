@@ -232,10 +232,11 @@
         </div>
 
         <div class="video-wrapper">
-          <video controls loop playsinline preload="metadata">
+          <video id="videoA" autoplay muted loop playsinline preload="auto">
             <source src="estilo-a-catalogo-telemetria.mp4" type="video/mp4">
             Tu navegador no soporta video MP4.
           </video>
+          <button onclick="toggleSound('videoA', this)" style="position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.7); border: 1px solid var(--cfmoto-cyan); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; backdrop-filter: blur(4px);">🔊 Sonido</button>
         </div>
 
         <div class="card-body">
@@ -264,10 +265,11 @@
         </div>
 
         <div class="video-wrapper">
-          <video controls loop playsinline preload="metadata">
+          <video id="videoB" autoplay muted loop playsinline preload="auto">
             <source src="estilo-b-adrenalina-reel.mp4" type="video/mp4">
             Tu navegador no soporta video MP4.
           </video>
+          <button onclick="toggleSound('videoB', this)" style="position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.7); border: 1px solid var(--cfmoto-red); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; backdrop-filter: blur(4px);">🔊 Sonido</button>
         </div>
 
         <div class="card-body">
@@ -300,5 +302,19 @@
 
   </div>
 
+  <script>
+    function toggleSound(videoId, btn) {
+      const vid = document.getElementById(videoId);
+      if (!vid) return;
+      if (vid.muted) {
+        vid.muted = false;
+        vid.play();
+        btn.textContent = '🔇 Silenciar';
+      } else {
+        vid.muted = true;
+        btn.textContent = '🔊 Sonido';
+      }
+    }
+  </script>
 </body>
 </html>
