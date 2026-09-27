@@ -1,0 +1,22 @@
+{
+  "name": "Alex Ramos — Asesor CFMOTO",
+  "short_name": "Alex Ramos",
+  "description": "Tarjeta digital NFC y catálogo oficial CFMOTO de Alex Ramos, Asesor de Motos.",
+  "start_url": "./tarjeta.html",
+  "display": "standalone",
+  "background_color": "#090c10",
+  "theme_color": "#00D1FF",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "img/cards/675sr.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "img/cards/675sr.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
