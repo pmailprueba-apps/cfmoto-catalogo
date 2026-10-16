@@ -6,10 +6,10 @@
 
 :root {
   --bg: #0a0c10;
-  --bg-2: #0e1116;
-  --surface: #14171d;
-  --surface-2: #1a1e26;
-  --border: #232a34;
+  --bg-2: rgba(14, 17, 22, 0.85);
+  --surface: rgba(20, 23, 29, 0.90);
+  --surface-2: rgba(26, 30, 38, 0.92);
+  --border: rgba(35, 42, 52, 0.85);
   --text: #f5f7fa;
   --muted: #98a2b3;
   --accent: #00d1ff;
@@ -32,6 +32,17 @@ body {
   line-height: 1.45;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('../img/bg-catalog.webp') no-repeat center center / cover;
+  opacity: 0.70;
+  pointer-events: none;
 }
 
 img { display: block; max-width: 100%; }
@@ -255,6 +266,8 @@ a { color: var(--accent); text-decoration: none; }
   scroll-snap-align: center;
   scroll-snap-stop: always;
   background: var(--surface);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -395,6 +408,8 @@ a { color: var(--accent); text-decoration: none; }
   display: flex;
   flex-direction: column;
   background: var(--surface);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
