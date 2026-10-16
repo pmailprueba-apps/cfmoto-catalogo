@@ -15,7 +15,20 @@ CF.cats = [
   { id: 'promos', label: 'PROMOCIONES',          sub: 'Precios especiales vigentes',         promos: true, img: 'img/cards/500sr.jpg' },
 ];
 
-CF.FEATURED_CODE = 'CF-1000-MV';
+CF.FEATURED_CODES = [
+  'MOTO-450SR-S',
+  'MOTO-450NK-G2',
+  'MOTO-450MT',
+  'MOTO-500SR-VOOM',
+  'MOTO-250NK-FUN',
+  'MOTO-675SR-R',
+  'MOTO-800MT-X',
+  'MOTO-450CLC',
+  'MOTO-150SC',
+  'CF-625-TOURING',
+  'CF-1000-MV',
+  'ZF-950-SPORT'
+];
 
 CF.state = { data: null };
 
@@ -88,14 +101,18 @@ CF.bindCta = function (root) {
   (root || document).querySelectorAll('[data-cta]').forEach((b) => {
     b.addEventListener('click', () => {
       const action = b.dataset.cta;
-      if (action === 'cotizacion' && CF.state.lastProduct) {
-        const url = CF.helpers.waLink(CF.state.lastProduct);
-        if (url) {
-          window.open(url, '_blank', 'noopener');
+      if (action === 'cotizacion') {
+        const prodCode = b.dataset.productCode;
+        const prod = prodCode ? CF.helpers.byCode(prodCode) : CF.state.lastProduct;
+        if (prod) {
+          const url = CF.helpers.waLink(prod);
+          if (url) {
+            window.open(url, '_blank', 'noopener');
+            return;
+          }
+          CF.showCta('Quiero cotización', 'WhatsApp comercial pendiente de configuración. Pronto podrás cotizar directo por WhatsApp.');
           return;
         }
-        CF.showCta('Quiero cotización', 'WhatsApp comercial pendiente de configuración. Pronto podrás cotizar directo por WhatsApp.');
-        return;
       }
       CF.showCta(b.textContent.trim(), CF.ctaMessages[action] || '');
     });
@@ -130,6 +147,11 @@ CF.render = function () {
   const page = parts[0] || '';
   const id = decodeURIComponent(parts[1] || '');
 
+  if (CF.__carouselCleanup) {
+    CF.__carouselCleanup();
+    CF.__carouselCleanup = null;
+  }
+
   document.body.classList.remove('show-sticky');
   const sticky = CF.el('stickyCta');
   if (sticky) sticky.hidden = page !== 'modelo';
@@ -145,26 +167,185 @@ CF.render = function () {
   else CF.renderHome();
 };
 
-/* ---------- Home ---------- */
-CF.renderHome = function () {
-  const feat = CF.helpers.byCode(CF.FEATURED_CODE);
-  CF.state.lastProduct = feat || null;
-  const featured = feat ? `
-    <section class="featured" aria-label="Modelo destacado">
-      <a class="feat-media" href="#/modelo/${feat.slug}" aria-label="Ver ${CF.helpers.esc(feat.name)}">
-        <img src="${CF.helpers.esc(feat.heroImg)}" alt="${CF.helpers.esc(feat.name)} ${feat.year}" loading="eager" decoding="async" />
-      </a>
-      <div class="feat-body">
-        <div class="feat-kicker">${feat.year ? 'MODELO ' + feat.year + ' · ' : ''}DESTACADO</div>
-        <h2 class="feat-name">${CF.helpers.esc(feat.name)}</h2>
-        ${feat.price !== null ? `<div class="feat-price">${CF.helpers.esc(feat.priceDisplay)}</div>` : '<div class="feat-price" style="color:var(--muted);font-size:16px;font-weight:800">Precio a consultar</div>'}
-        <div class="feat-ctas">
-          <button class="btn btn-primary" data-cta="cotizacion">Quiero cotización</button>
-          <a class="btn btn-ghost" href="#/modelo/${feat.slug}">Ver modelo</a>
+/* ---------- Carrusel Hero Multimodelo ---------- */
+CF.renderCarousel = function () {
+  const products = (CF.FEATURED_CODES || [])
+    .map((code) => CF.helpers.byCode(code))
+    .filter(Boolean);
+
+  if (!products.length) return '';
+
+  const slidesHtml = products.map((p, idx) => {
+    const kicker = (p.category ? p.category + ' · ' : '') + (p.year ? 'MODELO ' + p.year : '2026');
+    const priceHtml = p.hasPromo && p.promoPrice
+      ? `<div class="feat-price promo">${CF.helpers.esc(p.promoDisplay)} <span class="feat-price-old">${CF.helpers.esc(p.priceDisplay)}</span></div>`
+      : (p.price !== null
+        ? `<div class="feat-price">${CF.helpers.esc(p.priceDisplay)}</div>`
+        : '<div class="feat-price" style="color:var(--muted);font-size:16px;font-weight:800">Precio a consultar</div>');
+
+    return `
+      <div class="carousel-slide" data-index="${idx}">
+        <a class="feat-media" href="#/modelo/${p.slug}" aria-label="Ver ${CF.helpers.esc(p.name)}">
+          <span class="slide-badge">${CF.helpers.esc(kicker)}</span>
+          <img src="${CF.helpers.esc(p.heroImg)}" alt="${CF.helpers.esc(p.name)} ${p.year || ''}" loading="${idx === 0 ? 'eager' : 'lazy'}" decoding="async" />
+        </a>
+        <div class="feat-body">
+          <div class="feat-kicker">${CF.helpers.esc(kicker)}</div>
+          <h2 class="feat-name">${CF.helpers.esc(p.name)}</h2>
+          ${priceHtml}
+          <div class="feat-ctas">
+            <button class="btn btn-primary" data-cta="cotizacion" data-product-code="${p.code}">Quiero cotización</button>
+            <a class="btn btn-ghost" href="#/modelo/${p.slug}">Ver modelo</a>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  const dotsHtml = products.map((_, idx) => `
+    <button class="carousel-dot ${idx === 0 ? 'active' : ''}" data-dot-index="${idx}" aria-label="Ir a diapositiva ${idx + 1}" type="button"></button>
+  `).join('');
+
+  return `
+    <section class="hero-carousel" aria-label="Modelos destacados de CFMOTO">
+      <div class="carousel-bar">
+        <div class="carousel-title-wrap">
+          <span class="carousel-sub">Gama Destacada</span>
+          <h2 class="carousel-title">Modelos 2026</h2>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" id="carouselPrev" aria-label="Modelo anterior" type="button">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="carousel-arrow" id="carouselNext" aria-label="Modelo siguiente" type="button">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
         </div>
       </div>
-    </section>`
-    : '';
+
+      <div class="carousel-viewport" id="carouselViewport">
+        <div class="carousel-track" id="carouselTrack">
+          ${slidesHtml}
+        </div>
+      </div>
+
+      <div class="carousel-indicators" id="carouselDots" aria-label="Paginación de modelos">
+        ${dotsHtml}
+      </div>
+    </section>`;
+};
+
+CF.initCarousel = function () {
+  const track = CF.el('carouselTrack');
+  const viewport = CF.el('carouselViewport');
+  const prevBtn = CF.el('carouselPrev');
+  const nextBtn = CF.el('carouselNext');
+  const dotsContainer = CF.el('carouselDots');
+  if (!track || !viewport) return;
+
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+  const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.carousel-dot')) : [];
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  let isInteracting = false;
+
+  function updateActiveDot(idx) {
+    currentIndex = idx;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === idx);
+    });
+  }
+
+  function goToSlide(idx, smooth = true) {
+    if (idx < 0) idx = slides.length - 1;
+    if (idx >= slides.length) idx = 0;
+    currentIndex = idx;
+    const slide = slides[idx];
+    if (slide) {
+      viewport.scrollTo({
+        left: slide.offsetLeft,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+    }
+    updateActiveDot(idx);
+  }
+
+  function nextSlide() {
+    goToSlide((currentIndex + 1) % slides.length);
+  }
+
+  function prevSlide() {
+    goToSlide((currentIndex - 1 + slides.length) % slides.length);
+  }
+
+  if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+  if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      goToSlide(idx);
+      resetAutoplay();
+    });
+  });
+
+  let scrollTimeout = null;
+  viewport.addEventListener('scroll', () => {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const scrollLeft = viewport.scrollLeft;
+      let bestIdx = 0;
+      let minDiff = Infinity;
+      slides.forEach((s, i) => {
+        const diff = Math.abs(s.offsetLeft - scrollLeft);
+        if (diff < minDiff) {
+          minDiff = diff;
+          bestIdx = i;
+        }
+      });
+      updateActiveDot(bestIdx);
+    }, 60);
+  }, { passive: true });
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => {
+      if (!isInteracting) {
+        nextSlide();
+      }
+    }, 4500);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  viewport.addEventListener('mouseenter', () => { isInteracting = true; });
+  viewport.addEventListener('mouseleave', () => { isInteracting = false; });
+  viewport.addEventListener('touchstart', () => { isInteracting = true; }, { passive: true });
+  viewport.addEventListener('touchend', () => {
+    isInteracting = false;
+    resetAutoplay();
+  }, { passive: true });
+
+  startAutoplay();
+  CF.__carouselCleanup = stopAutoplay;
+};
+
+/* ---------- Home ---------- */
+CF.renderHome = function () {
+  const firstFeat = CF.helpers.byCode(CF.FEATURED_CODES[0]);
+  CF.state.lastProduct = firstFeat || null;
+
+  const carouselHtml = CF.renderCarousel();
 
   const catsHtml = CF.cats.map((c) => {
     const n = CF.state.data.products.filter((p) => CF.helpers.inCat(p, c)).length;
@@ -189,7 +370,7 @@ CF.renderHome = function () {
         <div class="hero-line" aria-hidden="true"></div>
       </section>
 
-      ${featured}
+      ${carouselHtml}
 
       <section class="sec" aria-label="Categorías">
         <div class="sec-title"><h2>Explora</h2><span>${CF.state.data.count} modelos 2026</span></div>
@@ -198,6 +379,7 @@ CF.renderHome = function () {
     </div>`;
 
   CF.bindCta(CF.el('app'));
+  CF.initCarousel();
 };
 
 /* ---------- Inicialización ---------- */
