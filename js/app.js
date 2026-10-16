@@ -18,10 +18,13 @@ CF.cats = [
 CF.FEATURED_CODES = [
   'MOTO-450SR-S',
   'MOTO-450NK-G2',
+  'CFL-230-DUAL',
+  'CFL-250-DUAL-FIABS',
   'MOTO-450MT',
+  'CFL-250NK-CARB',
+  'CFL-250SR-CARB',
   'MOTO-500SR-VOOM',
   'MOTO-250NK-FUN',
-  'MOTO-675SR-R',
   'MOTO-800MT-X',
   'MOTO-450CLC',
   'MOTO-150SC',
@@ -29,6 +32,24 @@ CF.FEATURED_CODES = [
   'CF-1000-MV',
   'ZF-950-SPORT'
 ];
+
+CF.CAROUSEL_IMAGES = {
+  'MOTO-450SR-S': 'img/carousel/450srs.webp',
+  'MOTO-500SR-VOOM': 'img/carousel/500sr.webp',
+  'MOTO-450NK-G2': 'img/carousel/450nk.webp',
+  'MOTO-250NK-FUN': 'img/carousel/250nk.webp',
+  'MOTO-450MT': 'img/carousel/450mt.webp',
+  'MOTO-800MT-X': 'img/carousel/800mtx.webp',
+  'MOTO-450CLC': 'img/carousel/450clc.webp',
+  'MOTO-150SC': 'img/carousel/150sc.webp',
+  'CF-625-TOURING': 'img/carousel/cforce625.webp',
+  'CF-1000-MV': 'img/carousel/cforce1000mud.webp',
+  'ZF-950-SPORT': 'img/carousel/zforce950.webp',
+  'CFL-230-DUAL': 'img/carousel/cflite_230dual.webp',
+  'CFL-250-DUAL-FIABS': 'img/carousel/cflite_250dual.webp',
+  'CFL-250NK-CARB': 'img/carousel/cflite_250nk.webp',
+  'CFL-250SR-CARB': 'img/carousel/cflite_250sr.webp'
+};
 
 CF.state = { data: null };
 
@@ -177,6 +198,7 @@ CF.renderCarousel = function () {
 
   const slidesHtml = products.map((p, idx) => {
     const kicker = (p.category ? p.category + ' · ' : '') + (p.year ? 'MODELO ' + p.year : '2026');
+    const imgUrl = (CF.CAROUSEL_IMAGES && CF.CAROUSEL_IMAGES[p.code]) || p.heroImg;
     const priceHtml = p.hasPromo && p.promoPrice
       ? `<div class="feat-price promo">${CF.helpers.esc(p.promoDisplay)} <span class="feat-price-old">${CF.helpers.esc(p.priceDisplay)}</span></div>`
       : (p.price !== null
@@ -187,7 +209,7 @@ CF.renderCarousel = function () {
       <div class="carousel-slide" data-index="${idx}">
         <a class="feat-media" href="#/modelo/${p.slug}" aria-label="Ver ${CF.helpers.esc(p.name)}">
           <span class="slide-badge">${CF.helpers.esc(kicker)}</span>
-          <img src="${CF.helpers.esc(p.heroImg)}" alt="${CF.helpers.esc(p.name)} ${p.year || ''}" loading="${idx === 0 ? 'eager' : 'lazy'}" decoding="async" />
+          <img src="${CF.helpers.esc(imgUrl)}" alt="${CF.helpers.esc(p.name)} ${p.year || ''}" loading="${idx === 0 ? 'eager' : 'lazy'}" decoding="async" />
         </a>
         <div class="feat-body">
           <div class="feat-kicker">${CF.helpers.esc(kicker)}</div>
